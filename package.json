@@ -1,0 +1,20 @@
+{
+  "name": "domber",
+  "version": "1.0.0",
+  "description": "Social media profiling and data gathering tool with graph visualization",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --debug"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
+    "electron-store": "^8.1.0",
+    "papaparse": "^5.4.1",
+    "vis-network": "^9.1.9"
+  },
+  "devDependencies": {
+    "electron": "^40.4.1"
+  }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domber - Social Media Profiler</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Critical styles to ensure display */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        #app {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .view {
+            display: none;
+            height: 100%;
+            overflow-y: auto;
+        }
+        .view.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;">
+            <h1 style="margin: 0; font-size: 2rem;">Domber</h1>
+            <div style="display: flex; gap: 1rem;">
+                <button class="nav-btn active" data-view="search" style="background: white; color: #667eea; border: none; padding: 0.5rem 1.5rem; border-radius: 25px; cursor: pointer; font-weight: bold;">Search</button>
+                <button class="nav-btn" data-view="saved" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 0.5rem 1.5rem; border-radius: 25px; cursor: pointer;">Saved</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div style="flex: 1; overflow: hidden; position: relative; background: #f5f7fa;">
+            <!-- Search View -->
+            <div id="search-view" class="view active" style="padding: 2rem;">
+                <div style="background: white; border-radius: 10px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <h2 style="margin-top: 0;">Search Social Media Profiles</h2>
+                    <div style="display: flex; gap: 1rem; margin: 1.5rem 0;">
+                        <input type="text" id="search-input" placeholder="Enter username (e.g., johndoe)" style="flex: 1; padding: 1rem; border: 2px solid #e1e4e8; border-radius: 8px; font-size: 1rem;">
+                        <button id="search-btn" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0 2rem; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer;">Search</button>
+                    </div>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <h3 style="margin-bottom: 1rem;">Select Platforms:</h3>
+                        <div id="sites-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; max-height: 200px; overflow-y: auto; padding: 1rem; background: #f5f7fa; border-radius: 8px;">
+                            <!-- Sites will be loaded here -->
+                            <div style="grid-column: 1/-1; text-align: center; color: #666;">Loading platforms...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="search-results" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem;">
+                    <!-- Results will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Saved View -->
+            <div id="saved-view" class="view" style="padding: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h2 style="margin: 0;">Saved Profiles</h2>
+                    <button id="clear-saved" style="background: #dc3545; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">Clear All</button>
+                </div>
+                <div id="saved-profiles" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem;">
+                    <!-- Saved profiles will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <div style="background: white; margin: 5% auto; padding: 2rem; border-radius: 10px; width: 90%; max-width: 500px; position: relative; max-height: 80vh; overflow-y: auto;">
+            <span id="modal-close" style="position: absolute; right: 1rem; top: 1rem; font-size: 1.5rem; cursor: pointer;">&times;</span>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" style="position: fixed; bottom: 20px; right: 20px; padding: 1rem 2rem; border-radius: 5px; color: white; font-weight: bold; z-index: 2000; display: none;"></div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
